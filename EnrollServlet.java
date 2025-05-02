@@ -20,9 +20,9 @@ public class EnrollServlet extends HttpServlet {
 
         // Hardcoded list of courses
         List<Course> allCourses = new ArrayList<>();
-        allCourses.add(new Course("101", "Data Structures", "Dr. Smith"));
-        allCourses.add(new Course("102", "Web Programming", "Prof. Lee"));
-        allCourses.add(new Course("103", "Databases", "Dr. Johnson"));
+        allCourses.add(new Course("101", "Data Structures", "Dr. Namal"));
+        allCourses.add(new Course("102", "Web Programming", "Prof. Kasun"));
+        allCourses.add(new Course("103", "Databases", "Dr. Saman"));
 
         Course selectedCourse = null;
         for (Course c : allCourses) {
