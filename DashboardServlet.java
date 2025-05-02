@@ -20,9 +20,9 @@ public class DashboardServlet extends HttpServlet {
         request.setAttribute("username", username);
 
         List<Course> courses = new ArrayList<>();
-        courses.add(new Course("101", "Data Structures", "Dr. Smith"));
-        courses.add(new Course("102", "Web Programming", "Prof. Lee"));
-        courses.add(new Course("103", "Databases", "Dr. Johnson"));
+        courses.add(new Course("101", "Data Structures", "Dr. Namal"));
+        courses.add(new Course("102", "Web Programming", "Prof. Kasun"));
+        courses.add(new Course("103", "Databases", "Dr. Saman"));
         request.setAttribute("courses", courses);
 
         List<Course> enrolled = (List<Course>) session.getAttribute("enrolledCourses");
