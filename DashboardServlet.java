@@ -1,16 +1,42 @@
 import java.io.IOException;
-import javax.servlet.ServletException;
+import java.util.*;
+import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
+import model.Course;
 
 @WebServlet("/DashboardServlet")
 public class DashboardServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO: Implement dashboard logic
-        // 1. Check if user is logged in (session)
-        // 2. Create a list of courses (hardcoded)
-        // 3. Store courses in request attribute
-        // 4. Forward to dashboard.jsp
+
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("username") == null) {
+            response.sendRedirect("login.html");
+            return;
+        }
+
+        String username = (String) session.getAttribute("username");
+        request.setAttribute("username", username);
+
+        List<Course> courses = new ArrayList<>();
+        courses.add(new Course("101", "Data Structures", "Dr. Smith"));
+        courses.add(new Course("102", "Web Programming", "Prof. Lee"));
+        courses.add(new Course("103", "Databases", "Dr. Johnson"));
+        request.setAttribute("courses", courses);
+
+        List<Course> enrolled = (List<Course>) session.getAttribute("enrolledCourses");
+        if (enrolled == null) {
+            enrolled = new ArrayList<>();
+        }
+        request.setAttribute("enrolledCourses", enrolled);
+
+        String message = request.getParameter("message");
+        if (message != null) {
+            request.setAttribute("message", message);
+        }
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("dashboard.jsp");
+        dispatcher.forward(request, response);
     }
 }
